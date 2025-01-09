@@ -97,11 +97,14 @@ const Chatbot = () => {
     setIsTyping(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/twitterchat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
-      });
+      const response = await fetch(
+        "https://socion-server.vercel.app/api/twitterchat",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        }
+      );
 
       const data = await response.json();
       console.log(data);
