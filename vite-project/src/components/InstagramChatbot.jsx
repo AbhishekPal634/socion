@@ -98,7 +98,7 @@ const Chatbot = () => {
 
     try {
       const response = await fetch(
-        "https://socion-server.vercel.app/api/instachat",
+        `${import.meta.env.VITE_API_URL}/api/instachat`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -5,9 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:staging": "dotenv -e .env.staging vite",
+    "dev:prod": "dotenv -e .env.production vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:staging": "dotenv -e .env.staging vite build",
+    "build:prod": "dotenv -e .env.production vite build"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.4",
@@ -16,6 +20,8 @@
     "@tabler/icons-react": "^3.28.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
     "framer-motion": "^11.16.4",
     "lucide-react": "^0.469.0",
     "motion": "^11.16.1",

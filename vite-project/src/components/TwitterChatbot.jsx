@@ -98,7 +98,7 @@ const Chatbot = () => {
 
     try {
       const response = await fetch(
-        "https://socion-server.vercel.app/api/twitterchat",
+        `${import.meta.env.VITE_API_URL}/api/twitterchat`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
