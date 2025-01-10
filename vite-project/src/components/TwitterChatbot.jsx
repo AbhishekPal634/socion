@@ -78,7 +78,10 @@ const ChatInput = ({ onSend }) => {
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
-    { text: "Hello! How can I help you today?", isBot: true },
+    {
+      text: "Hey! I am here to help you analyze post performance, compare content, and find the best times to post!",
+      isBot: true,
+    },
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
@@ -129,9 +132,17 @@ const Chatbot = () => {
   };
 
   useEffect(() => {
+    const initialHeight = window.innerHeight;
+
     const handleResize = () => {
+      const currentHeight = window.innerHeight;
+
+      // Ignore resize events caused by keyboard opening
+      if (initialHeight - currentHeight > 100) return;
+
       setIsMinimized(window.innerWidth < 768);
     };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -154,7 +165,9 @@ const Chatbot = () => {
         <div className="flex-shrink-0 flex justify-between items-center p-4 border-b bg-black text-white">
           <div className="flex items-center gap-2">
             <Bot size={24} />
-            <h2 className="text-lg font-semibold">Chat Assistant</h2>
+            <h2 className="text-lg font-semibold">
+              X (Twitter) Chat Assistant
+            </h2>
           </div>
           <button
             onClick={() => setIsMinimized(true)}
