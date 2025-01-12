@@ -78,7 +78,10 @@
 
 // const Chatbot = () => {
 //   const [messages, setMessages] = useState([
-//     { text: "Hello! How can I help you today?", isBot: true },
+//     {
+//       text: "Hi! I am your Instagram insights assistant. Let us explore which posts perform best, the ideal posting times, and more!",
+//       isBot: true,
+//     },
 //   ]);
 //   const [isTyping, setIsTyping] = useState(false);
 //   const messagesEndRef = useRef(null);
@@ -129,9 +132,17 @@
 //   };
 
 //   useEffect(() => {
+//     const initialHeight = window.innerHeight;
+
 //     const handleResize = () => {
+//       const currentHeight = window.innerHeight;
+
+//       // Ignore resize events caused by keyboard opening
+//       if (initialHeight - currentHeight > 100) return;
+
 //       setIsMinimized(window.innerWidth < 768);
 //     };
+
 //     window.addEventListener("resize", handleResize);
 //     return () => window.removeEventListener("resize", handleResize);
 //   }, []);
@@ -154,7 +165,7 @@
 //         <div className="flex-shrink-0 flex justify-between items-center p-4 border-b bg-black text-white">
 //           <div className="flex items-center gap-2">
 //             <Bot size={24} />
-//             <h2 className="text-lg font-semibold">Chat Assistant</h2>
+//             <h2 className="text-lg font-semibold">Instagram Chat Assistant</h2>
 //           </div>
 //           <button
 //             onClick={() => setIsMinimized(true)}
@@ -193,6 +204,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Send, MessageCircle, X, Bot, User } from "lucide-react";
+import axios from "axios";
 
 const TypingIndicator = () => (
   <div className="flex gap-2 p-3 bg-gray-100 rounded-lg rounded-tl-none w-16">
@@ -269,6 +281,16 @@ const ChatInput = ({ onSend }) => {
   );
 };
 
+// Create axios instance with default configuration
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  // Enable credentials if you need to send cookies
+  withCredentials: true,
+});
+
 const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
@@ -293,20 +315,11 @@ const Chatbot = () => {
     setIsTyping(true);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/instachat`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message }),
-        }
-      );
-
-      const data = await response.json();
-      console.log(data);
+      const { data } = await api.post("/api/instachat", {
+        message,
+      });
 
       setIsTyping(false);
-
       setMessages((prev) => [
         ...prev,
         {
@@ -319,7 +332,12 @@ const Chatbot = () => {
       setIsTyping(false);
       setMessages((prev) => [
         ...prev,
-        { text: "Oops! Something went wrong. Please try again.", isBot: true },
+        {
+          text:
+            error.response?.data?.message ||
+            "Oops! Something went wrong. Please try again.",
+          isBot: true,
+        },
       ]);
     }
   };
@@ -329,10 +347,7 @@ const Chatbot = () => {
 
     const handleResize = () => {
       const currentHeight = window.innerHeight;
-
-      // Ignore resize events caused by keyboard opening
       if (initialHeight - currentHeight > 100) return;
-
       setIsMinimized(window.innerWidth < 768);
     };
 
