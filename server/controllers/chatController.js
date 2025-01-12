@@ -35,7 +35,7 @@ export const handleInstagramChat = async (req, res) => {
     );
 
     // Log the entire response for debugging
-    console.log("Full response:", JSON.stringify(response, null, 2));
+    // console.log("Full response:", JSON.stringify(response, null, 2));
 
     // Extract the message text from the nested response structure
     let botResponse;
@@ -103,7 +103,7 @@ export const handleTwitterChat = async (req, res) => {
     );
 
     // Log the entire response for debugging
-    console.log("Full response:", JSON.stringify(response, null, 2));
+    // console.log("Full response:", JSON.stringify(response, null, 2));
 
     // Extract the message text from the nested response structure
     let botResponse;
