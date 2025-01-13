@@ -174,7 +174,7 @@ const Chatbot = () => {
 	return (
 		<div className='fixed right-0 top-16 bottom-0 w-full md:w-[380px] border-l bg-background shadow-lg'>
 			<div className='flex flex-col h-full'>
-				<div className='flex-shrink-0 flex justify-between items-center p-4 border-b bg-background text-white'>
+				<div className='flex-shrink-0 flex justify-between items-center p-4 border-b bg-black text-white'>
 					<div className='flex items-center gap-2'>
 						<Bot size={24} />
 						<h2 className='text-lg font-semibold'>
