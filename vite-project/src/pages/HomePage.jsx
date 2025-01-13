@@ -36,9 +36,7 @@ const HomePage = () => {
 						transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
 						className='text-2xl pt-32 px-2 md:text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white max-w-full leading-relaxed lg:leading-snug text-center mx-auto'>
 						Welcome to{' '}
-						<Highlight className='text-gray-900 dark:text-white'>
-							Socion
-						</Highlight>
+						<Highlight className='text-white'>Socion</Highlight>
 					</motion.h1>
 				</HeroHighlight>
 			</div>
